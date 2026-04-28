@@ -16,14 +16,7 @@ reloads, session restarts, and reopening files. As long as the hunk exists in
 
 ## Demo
 
-```
- 31   function greet(name)          │ @@ -31,4 +31,3 @@
- 32 - local msg = "hi, " .. name   │ -  local msg = "hi, " .. name
- 33   return msg                   │ -  msg = msg .. "!"
- 34 + return msg                   │ +  return msg
-                                   │
-                                   │  <Enter>/<y> revert  ·  <Esc>/<q> cancel
-```
+![demo](assets/demo.gif)
 
 ---
 
