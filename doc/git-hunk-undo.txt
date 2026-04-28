@@ -1,8 +1,8 @@
 *git-hunk-undo.txt*   IntelliJ-style per-hunk git rollback for Neovim
 
-Author:   Your Name
+Author:   Nicky
 License:  MIT
-Homepage: https://github.com/YOUR_USERNAME/git-hunk-undo.nvim
+Homepage: https://github.com/nickyhuyskens/git-hunk-undo.nvim
 
 ==============================================================================
 CONTENTS                                              *git-hunk-undo-contents*
@@ -40,7 +40,7 @@ reopening files. As long as the hunk exists in `git diff`, it can be reverted.
 lazy.nvim ~
 >lua
   {
-    "YOUR_USERNAME/git-hunk-undo.nvim",
+    "nickyhuyskens/git-hunk-undo.nvim",
     dependencies = { "lewis6991/gitsigns.nvim" },
     config = function()
       require("git-hunk-undo").setup()
@@ -51,7 +51,7 @@ lazy.nvim ~
 packer.nvim ~
 >lua
   use {
-    "YOUR_USERNAME/git-hunk-undo.nvim",
+    "nickyhuyskens/git-hunk-undo.nvim",
     requires = { "lewis6991/gitsigns.nvim" },
     config = function()
       require("git-hunk-undo").setup()
@@ -62,7 +62,7 @@ packer.nvim ~
 vim-plug ~
 >vim
   Plug 'lewis6991/gitsigns.nvim'
-  Plug 'YOUR_USERNAME/git-hunk-undo.nvim'
+  Plug 'nickyhuyskens/git-hunk-undo.nvim'
 <
 >lua
   " In your init.lua / after/plugin:

@@ -1,3 +1,5 @@
+⚠️ Fully vibe coded in 1 prompt but does what I need it to do! 
+
 # git-hunk-undo.nvim
 
 IntelliJ-style per-hunk git rollback for Neovim.
@@ -38,7 +40,7 @@ reloads, session restarts, and reopening files. As long as the hunk exists in
 
 ```lua
 {
-  "YOUR_USERNAME/git-hunk-undo.nvim",
+  "nickyhuyskens/git-hunk-undo.nvim",
   dependencies = { "lewis6991/gitsigns.nvim" },
   config = function()
     require("git-hunk-undo").setup()
@@ -50,7 +52,7 @@ reloads, session restarts, and reopening files. As long as the hunk exists in
 
 ```lua
 use {
-  "YOUR_USERNAME/git-hunk-undo.nvim",
+  "nickyhuyskens/git-hunk-undo.nvim",
   requires = { "lewis6991/gitsigns.nvim" },
   config = function()
     require("git-hunk-undo").setup()
@@ -62,7 +64,7 @@ use {
 
 ```vim
 Plug 'lewis6991/gitsigns.nvim'
-Plug 'YOUR_USERNAME/git-hunk-undo.nvim'
+Plug 'nickyhuyskens/git-hunk-undo.nvim'
 ```
 
 Then in Lua:
