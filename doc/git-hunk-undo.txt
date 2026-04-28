@@ -1,0 +1,141 @@
+*git-hunk-undo.txt*   IntelliJ-style per-hunk git rollback for Neovim
+
+Author:   Your Name
+License:  MIT
+Homepage: https://github.com/YOUR_USERNAME/git-hunk-undo.nvim
+
+==============================================================================
+CONTENTS                                              *git-hunk-undo-contents*
+
+  1. Introduction .............. |git-hunk-undo-introduction|
+  2. Requirements .............. |git-hunk-undo-requirements|
+  3. Installation .............. |git-hunk-undo-installation|
+  4. Setup ..................... |git-hunk-undo-setup|
+  5. Commands .................. |git-hunk-undo-commands|
+  6. API ....................... |git-hunk-undo-api|
+  7. License ................... |git-hunk-undo-license|
+
+==============================================================================
+1. INTRODUCTION                                   *git-hunk-undo-introduction*
+
+git-hunk-undo.nvim replicates IntelliJ IDEA's "Rollback Lines" feature.
+
+Place your cursor anywhere inside a git-modified hunk and press the revert
+key. A floating diff window shows exactly what will be restored. Confirm with
+<Enter> or <y>, cancel with <Esc> or <q>.
+
+Because the revert is driven entirely by git state (via gitsigns.nvim) it
+survives buffer reloads, session restarts, and even manually closing and
+reopening files. As long as the hunk exists in `git diff`, it can be reverted.
+
+==============================================================================
+2. REQUIREMENTS                                   *git-hunk-undo-requirements*
+
+  - Neovim >= 0.9.0
+  - gitsigns.nvim (https://github.com/lewis6991/gitsigns.nvim)
+
+==============================================================================
+3. INSTALLATION                                   *git-hunk-undo-installation*
+
+lazy.nvim ~
+>lua
+  {
+    "YOUR_USERNAME/git-hunk-undo.nvim",
+    dependencies = { "lewis6991/gitsigns.nvim" },
+    config = function()
+      require("git-hunk-undo").setup()
+    end,
+  }
+<
+
+packer.nvim ~
+>lua
+  use {
+    "YOUR_USERNAME/git-hunk-undo.nvim",
+    requires = { "lewis6991/gitsigns.nvim" },
+    config = function()
+      require("git-hunk-undo").setup()
+    end,
+  }
+<
+
+vim-plug ~
+>vim
+  Plug 'lewis6991/gitsigns.nvim'
+  Plug 'YOUR_USERNAME/git-hunk-undo.nvim'
+<
+>lua
+  " In your init.lua / after/plugin:
+  require("git-hunk-undo").setup()
+<
+
+==============================================================================
+4. SETUP                                               *git-hunk-undo-setup*
+                                                      *git-hunk-undo.setup()*
+
+>lua
+  require("git-hunk-undo").setup({
+    -- Keymap overrides. Each value is a keymap string or `false` to disable
+    -- that individual mapping. Set `keymaps = false` to disable all keymaps.
+    keymaps = {
+      undo_hunk    = "<leader>gU",   -- revert hunk under cursor (with confirm)
+      preview_hunk = "<leader>gP",   -- peek at the diff (non-focused float)
+      next_hunk    = "]H",           -- jump to next hunk
+      prev_hunk    = "[H",           -- jump to previous hunk
+    },
+  })
+<
+
+Disable all keymaps and use commands only ~
+>lua
+  require("git-hunk-undo").setup({ keymaps = false })
+<
+
+Disable a single keymap ~
+>lua
+  require("git-hunk-undo").setup({
+    keymaps = { preview_hunk = false },
+  })
+<
+
+==============================================================================
+5. COMMANDS                                           *git-hunk-undo-commands*
+
+:GitUndoHunk                                              *:GitUndoHunk*
+  Revert the hunk under the cursor back to HEAD. Opens a focused diff float;
+  press <Enter>/<y> to confirm or <Esc>/<q> to cancel.
+
+:GitPreviewHunk                                          *:GitPreviewHunk*
+  Open a non-focused diff preview for the hunk under the cursor. Closes
+  automatically when the cursor moves or the buffer is left.
+
+:GitNextHunk                                              *:GitNextHunk*
+  Jump to the start of the next git hunk in the current buffer.
+
+:GitPrevHunk                                              *:GitPrevHunk*
+  Jump to the start of the previous git hunk in the current buffer.
+
+==============================================================================
+6. API                                                     *git-hunk-undo-api*
+
+All functions are accessible from the module table.
+
+require("git-hunk-undo").undo_hunk()                 *git-hunk-undo.undo_hunk()*
+  Revert the hunk under the cursor (prompts for confirmation).
+
+require("git-hunk-undo").preview_hunk()           *git-hunk-undo.preview_hunk()*
+  Show a non-focused diff float for the hunk under the cursor.
+
+require("git-hunk-undo").next_hunk()                 *git-hunk-undo.next_hunk()*
+  Move the cursor to the next hunk.
+
+require("git-hunk-undo").prev_hunk()                 *git-hunk-undo.prev_hunk()*
+  Move the cursor to the previous hunk.
+
+==============================================================================
+7. LICENSE                                             *git-hunk-undo-license*
+
+MIT License. See LICENSE in the repository root.
+
+==============================================================================
+vim:tw=78:ts=8:ft=help:norl:
